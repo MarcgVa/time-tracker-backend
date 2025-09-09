@@ -14,10 +14,8 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-
-
 model User {
-  id        String       @id @default(uuid())
+  id        String    @id @default(uuid())
   name      String
   email     String    @unique
   password  String
@@ -40,18 +38,18 @@ model Project {
 }
 
 model TimeEntry {
-  id        Int      @id @default(autoincrement())
-  project   Project  @relation(fields: [projectId], references: [id])
+  id        Int       @id @default(autoincrement())
+  project   Project   @relation(fields: [projectId], references: [id])
   projectId Int
   startTime DateTime
   endTime   DateTime?
   notes     String?
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
 }
 
 model Invoice {
-  id        String      @id @default(uuid())
+  id        String   @id @default(uuid())
   project   Project  @relation(fields: [projectId], references: [id])
   projectId Int
   total     Float
