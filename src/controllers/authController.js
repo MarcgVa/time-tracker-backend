@@ -5,6 +5,7 @@ const { bcrypt, jwt } = require("../utils/auth");
 
 const signup = async (req, res, next) => {
   try {
+    console.log(req.body);
     const { name, email, password } = req.body;
 
     const salt = await bcrypt.genSalt(10);
@@ -57,13 +58,7 @@ const me = async (req, res, next) => {
   });
 
   res.send(user);
-  
-}
-
-
-
-
-
+};
 
 
 
