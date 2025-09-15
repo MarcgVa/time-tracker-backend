@@ -12,7 +12,7 @@ const timeEntryRoutes = require('../src/routes/timeEntryRoutes');
 
 
 app.use("/api/auth", authRoutes);
-app.use('/api/project', projectRoutes);
+app.use('/api/projects', projectRoutes);
 app.use('/api/invoice', invoiceRoutes);
 app.use('/api/time', timeEntryRoutes);
 
