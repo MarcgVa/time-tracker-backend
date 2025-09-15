@@ -3,10 +3,10 @@ const { getInvoices, getInvoice, createInvoice, delInvoice } = require("../contr
 const { authenticateToken } = require("../middleware/auth");
 
 
-router.get('/:projectId', authenticateToken, getInvoices);
-router.get('/:invoice', authenticateToken, getInvoice);
+router.get('/:projectId/invoices', authenticateToken, getInvoices);
+router.get('/:id', authenticateToken, getInvoice);
 router.post('/', authenticateToken, createInvoice);
-router.delete('/:invoice',authenticateToken, delInvoice);
+router.delete('/:id',authenticateToken, delInvoice);
 
 
 module.exports = router;

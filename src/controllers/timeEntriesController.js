@@ -22,7 +22,8 @@ const getTimeEntries = async (req, res, next) => {
 const startTimer = async (req, res, next) => {
   try {
     //const startTime = new Date();
-    const { projectId, notes } = req.body;
+    const { projectId } = req.params.projectId;
+    const {notes} = req.body;
     const entry = await prisma.timeEntry.create({
       data: {
         projectId,
@@ -56,7 +57,7 @@ const stopTimer = async (req, res, next) => {
 };
 const delTimeEntry = async (req, res, next) => {
   try {
-    const { entryId } = req.body;
+    const { entryId } = req.params.entryId;
     const entry = await prisma.timeEntry.delete({
       where: {
         id: parseInt(entryId),

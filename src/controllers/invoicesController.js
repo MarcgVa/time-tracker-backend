@@ -20,7 +20,7 @@ const getInvoices = async (req, res, next) => {
 
 const getInvoice = async (req, res, next) => {
   try {
-    const { id } = req.params.invoice;
+    const { id } = req.params.id;
     const invoice = await prisma.invoice.findUnique({
       where: {
         id,
@@ -51,7 +51,7 @@ const createInvoice = async (req, res, next) => {
 
 const delInvoice = async (req, res, next) => {
   try {
-    const { id } = req.params;
+    const { id } = req.params.id;
     const invoice = await prisma.invoice.delete({
       where: {
         id,
