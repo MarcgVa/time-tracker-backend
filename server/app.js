@@ -11,10 +11,10 @@ const timeEntryRoutes = require('../src/routes/timeEntryRoutes');
 
 
 
-app.use("/auth", authRoutes);
-app.use('/projects', projectRoutes);
-app.use('/invoice', invoiceRoutes);
-app.use('/', timeEntryRoutes);
+app.use("/api/auth", authRoutes);
+app.use('/api/projects', projectRoutes);
+app.use('/api/invoice', invoiceRoutes);
+app.use('/api', timeEntryRoutes);
 
 
 module.exports = app;

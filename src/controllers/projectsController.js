@@ -16,7 +16,7 @@ const getProjects = async (req, res, next) => {
 
 const getProject = async (req, res, next) => {
   try {
-    const { projectId } = req.params.id;
+    const { projectId } = req.params;
     const project = await prisma.project.findUnique({
       where: { id: projectId },
     });
