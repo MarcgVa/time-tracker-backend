@@ -1,4 +1,3 @@
-const { get } = require("../../server/app");
 const { prisma } = require("../utils/prisma");
 
 
@@ -36,7 +35,32 @@ const getInvoice = async (req, res, next) => {
 
 const createInvoice = async (req, res, next) => {
   try {
-    const { projectId, total } = req.body;
+    const { projectId } = req.body;
+
+    //Get project and timeEntries
+    const project = await prisma.project.findUnique({
+      where: {
+        id: projectId,
+      },
+      include: {
+        timeEntries: {
+          where: {
+            invoice: null,
+          },
+        },
+      },
+    });
+    
+    if (!project) { return res.Status(404).json({ error: "Project not found" }) };
+
+    //calculate invoice amount
+    const seconds = project.timeEntries.reduce((s, e) => s + (e.endTime && e.startTime ? (new Date(e.endTime) - new Date(e.startTime)) / 1000 : 0), 0);
+    
+    const hours = seconds / 3600;
+    const total = Number((hours * (project.hourlyRate || 0)).toFixed(2));
+ 
+
+    //create invoice
     const invoice = await prisma.invoice.create({
       data: {
         projectId,
@@ -44,6 +68,20 @@ const createInvoice = async (req, res, next) => {
         issuedAt: new Date(),
       },
     });
+
+    //Update timeEntries that were included on this invoice
+    const updatedEntries = await prisma.timeEntry.updateMany({
+      where: {
+        projectId,
+        invoice: null,
+      },
+      data: {
+        invoice: invoice.id,
+      },
+    });
+
+    res.json(invoice);
+
   } catch (err) {
     console.error(err);
   }

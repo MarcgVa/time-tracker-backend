@@ -26,7 +26,7 @@ const startTimer = async (req, res, next) => {
     const entry = await prisma.timeEntry.create({
       data: {
         projectId: id,
-        notes,
+        notes: notes || "No Info",
         startTime: new Date(),
       },
     });

@@ -5,7 +5,7 @@ const { authenticateToken } = require("../middleware/auth");
 
 
 router.get("/", authenticateToken, getProjects);
-router.post('/', createProject);
+router.post('/', authenticateToken, createProject);
 router.get('/:projectId', authenticateToken, getProject);
 router.put('/:projectId', authenticateToken, updateProject),
 router.delete('/:projectId', authenticateToken, deleteProject),
