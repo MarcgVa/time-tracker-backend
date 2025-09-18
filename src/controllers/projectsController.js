@@ -1,4 +1,6 @@
+require('dotenv').config();
 const { prisma } = require('../utils/prisma');
+const { jwt } = require('../utils/auth');
 
 const getProjects = async (req, res, next) => {
   try {
@@ -16,7 +18,7 @@ const getProjects = async (req, res, next) => {
 
 const getProject = async (req, res, next) => {
   try {
-    const { projectId } = req.params.id;
+    const { projectId } = req.params;
     const project = await prisma.project.findUnique({
       where: { id: projectId },
     });
@@ -32,10 +34,16 @@ const getProject = async (req, res, next) => {
 
 const createProject = async (req, res, next) => {
   try {
-    const { name, description, hourlyRate } = req.body
-    const { userId } = req.user.id;
+    const { name, description, hourlyRate } = req.body;
+    const userId = req.user.id;
+  
     const project = await prisma.project.create({
-      data: { name, description, hourlyRate, userId: userId },
+      data: {
+        name,
+        description,
+        hourlyRate: Number(hourlyRate),
+        userId,
+      },
     });
 
     res.json(project);
