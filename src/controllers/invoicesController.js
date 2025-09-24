@@ -9,7 +9,13 @@ const getInvoices = async (req, res, next) => {
       where: {
         projectId,
       },
+      include: {
+        project: true,
+      },
     });
+
+    console.log(invoices);
+
     res.json(invoices);
   } catch (err) {
     console.error(err);
