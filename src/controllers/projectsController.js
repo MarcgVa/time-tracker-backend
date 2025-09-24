@@ -9,6 +9,7 @@ const getProjects = async (req, res, next) => {
       where: { userId },
       include: { timeEntries: true, invoices: true },
     });
+
     res.json(projects);
 
   } catch (err) {
