@@ -14,8 +14,6 @@ const getInvoices = async (req, res, next) => {
       },
     });
 
-    console.log(invoices);
-
     res.json(invoices);
   } catch (err) {
     console.error(err);
@@ -61,11 +59,9 @@ const createInvoice = async (req, res, next) => {
 
     //calculate invoice amount
     const seconds = project.timeEntries.reduce((s, e) => s + (e.endTime && e.startTime ? (new Date(e.endTime) - new Date(e.startTime)) / 1000 : 0), 0);
-    
     const hours = seconds / 3600;
     const total = Number((hours * (project.hourlyRate || 0)).toFixed(2));
  
-
     //create invoice
     const invoice = await prisma.invoice.create({
       data: {
@@ -107,5 +103,24 @@ const delInvoice = async (req, res, next) => {
   }
 };
 
+const getInvoiceEntries = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const entries = await prisma.timeEntry.findMany({
+      where: {
+        invoice: id,
+      },
+    });
 
-module.exports = {getInvoices, getInvoice, createInvoice, delInvoice};
+    console.log(id);
+
+    res.json(entries);
+
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+
+
+module.exports = {getInvoices, getInvoice, createInvoice, delInvoice, getInvoiceEntries};
