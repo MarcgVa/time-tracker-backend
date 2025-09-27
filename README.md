@@ -26,15 +26,18 @@ This backend provides secure authentication, project management, time tracking, 
 ```
 backend/
 ├─ prisma/
-│ ├─ schema.prisma # Database schema
-│ ├─ seed.js # Seed script
-├─ src/
-│ ├─ index.js # Server entry
+│ └─ schema.prisma # Database schema
+│ 
+├─ server/
 │ ├─ app.js # Express app config
+│ ├─ seed.js # Seed script
+│ ├─ index.js # Server entry
+│ └─testApp.js
+│
+├─ src/
 │ ├─ routes/ # Auth, Projects, Time, Invoices
 │ ├─ controllers/ # Business logic
 │ ├─ middleware/ # Auth, error handling
-│ ├─ services/ # DB calls
 │ └─ utils/ # Helpers
 ├─ tests/ # Jest unit tests
 └─ package.json
@@ -52,20 +55,43 @@ git clone https://github.com/yourusername/freelancer-time-tracker-backend.git
 cd freelancer-time-tracker-backend
 ```
 2. **Install dependencies**
+   ```bash
+    npm install
+   ```
 3. **Configure environment**
+   Create .env:
+   ```bash
+    DATABASE_URL=postgresql://postgres:postgres@localhost:5432/freelancer_time_tracker
+    JWT_SECRET=supersecretjwtkey  #make your real key
+    PORT=4000
+
+   ```
 4. **Run migrations and seed data**
+   ```bash
+    npx prisma migrate dev
+    npx prisma db seed
+
+   ```
 5. **Start server**
+   ```bash
+   npm run dev
+   ```
 
+Backend runs at http://localhost:4000/api.
 ---
-##🧪 Testing
+## 🧪 Testing
 Unit Tests (Jest)
+```bash 
 npm test
+```
 
-E2E Tests with Cypress
+### E2E Tests with Cypress
 
 When combined with the frontend and seed DB:
 
+```bash
 npm run cypress:run
+```
 
 ## 📦 API Endpoints Overview
 
@@ -75,10 +101,7 @@ npm run cypress:run
 - POST /projects – Create a new project
 - POST /time – Add time entry
 - GET /invoices – View invoices
-
-POST /invoices – Generate invoice
-
-(Full API reference in /docs or Postman collection.)
+- POST /invoices – Generate invoice
 
 ## 🎨 Design Philosophy
 
