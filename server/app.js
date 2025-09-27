@@ -14,7 +14,7 @@ const timeEntryRoutes = require('../src/routes/timeEntryRoutes');
 app.use("/api/auth", authRoutes);
 app.use('/api/projects', projectRoutes);
 app.use('/api/invoice', invoiceRoutes);
-app.use('/api', timeEntryRoutes);
+app.use('/api/time', timeEntryRoutes);
 
 //simple health check
 app.get("/health", (req, res) => res.json({ ok: true }));

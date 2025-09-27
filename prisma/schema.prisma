@@ -50,11 +50,11 @@ model TimeEntry {
 }
 
 model Invoice {
-  id        String   @id @default(uuid())
-  project   Project  @relation(fields: [projectId], references: [id])
+  id        String    @id @default(uuid())
+  project   Project   @relation(fields: [projectId], references: [id])
   projectId String
   total     Float
-  issuedAt  DateTime @default(now())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  issuedAt  DateTime?
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
 }
