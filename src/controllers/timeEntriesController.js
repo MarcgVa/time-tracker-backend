@@ -8,6 +8,7 @@ const { prisma } = require("../utils/prisma");
 const getTimeEntries = async (req, res, next) => {
   try {
     const { id } = req.params;
+    console.log(id);
     const entries = await prisma.timeEntry.findMany({
       where: { projectId: {equals: id,}, },
     });
