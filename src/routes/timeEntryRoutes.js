@@ -5,7 +5,7 @@ const { authenticateToken } = require("../middleware/auth");
 
 router.get('/projects/:id/times', getTimeEntries);
 router.post('/projects/:id/start', authenticateToken, startTimer);
-router.put('/:id/stop', authenticateToken, stopTimer);
-router.delete('/:id/delete',authenticateToken, delTimeEntry);
+router.put('/time/:id/stop', authenticateToken, stopTimer);
+router.delete('/time/:id/delete',authenticateToken, delTimeEntry);
 
 module.exports = router;

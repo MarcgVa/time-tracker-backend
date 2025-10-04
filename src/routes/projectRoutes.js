@@ -4,11 +4,9 @@ const { authenticateToken } = require("../middleware/auth");
 
 
 
-router.get("/", authenticateToken, getProjects);
-router.post('/', authenticateToken, createProject);
-router.get('/:projectId', authenticateToken, getProject);
-router.put('/:projectId', authenticateToken, updateProject),
-router.delete('/:projectId', authenticateToken, deleteProject),
-
-
-module.exports = router;
+router.get("/projects/", authenticateToken, getProjects);
+router.post("/projects/", authenticateToken, createProject);
+router.get("/projects/:projectId", authenticateToken, getProject);
+router.put("/projects/:projectId", authenticateToken, updateProject),
+  router.delete("/projects/:projectId", authenticateToken, deleteProject),
+  (module.exports = router);

@@ -4,8 +4,8 @@ const { authenticateToken } = require("../middleware/auth");
 
 
 
-router.post("/signup", signup);
-router.post("/login", login);
+router.post("/auth/signup", signup);
+router.post("/auth/login", login);
 router.get("/me", authenticateToken, me);
 
 
