@@ -1,6 +1,6 @@
-# ⏱️ Freelancer Time Tracker – Backend
+# ⏱️ Project Time Tracker – Backend
 
-A modern **Node.js + PostgreSQL + Prisma** backend API powering the **Freelancer Time Tracker & Invoicing App**.
+A modern **Node.js + PostgreSQL + Prisma** backend API powering the **Project Time Tracker & Invoicing App**.
 
 This backend provides secure authentication, project management, time tracking, and invoice endpoints consumed by the React/Redux frontend.
 
