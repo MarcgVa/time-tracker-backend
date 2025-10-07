@@ -19,7 +19,7 @@ const signup = async (req, res, next) => {
     });
 
     const token = jwt.sign({ id: user.id, email: user.email }, process.env.JWT_SECRET);
-    res.json({ user, token });
+    res.send(201).json({ user, token });
 
   }catch(err){
     res.status(400).json({ error: "User already exists" });

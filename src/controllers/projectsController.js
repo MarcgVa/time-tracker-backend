@@ -63,7 +63,7 @@ const updateProject = async (req, res, next) => {
       data: { name, description, hourlyRate },
     });
     
-    res.Status(200).json(project);
+    res.json(project);
 
   } catch (err) {
     console.error(err);
