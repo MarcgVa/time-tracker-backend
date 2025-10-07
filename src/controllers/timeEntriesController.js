@@ -8,7 +8,6 @@ const { prisma } = require("../utils/prisma");
 const getTimeEntries = async (req, res, next) => {
   try {
     const { id } = req.params;
-    console.log(id);
     const entries = await prisma.timeEntry.findMany({
       where: { projectId: {equals: id,}, },
     });
@@ -31,6 +30,7 @@ const startTimer = async (req, res, next) => {
         startTime: new Date(),
       },
     });
+
     res.json(entry);
   } catch (err) {
     console.error(err);
@@ -46,7 +46,7 @@ const stopTimer = async (req, res, next) => {
         id: parseInt(id),
       },
       data: {
-        endTime: new Date()
+        endTime: new Date(),
       },
     });
 
