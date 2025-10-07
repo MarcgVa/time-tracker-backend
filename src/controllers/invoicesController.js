@@ -5,6 +5,7 @@ const { prisma } = require("../utils/prisma");
 const getInvoices = async (req, res, next) => {
   try {
     const { projectId } = req.params.projectId;
+   
     const invoices = await prisma.invoice.findMany({
       where: {
         projectId,
@@ -24,6 +25,8 @@ const getInvoices = async (req, res, next) => {
 const getInvoice = async (req, res, next) => {
   try {
     const { id } = req.params.id;
+    if (!id) return res.status(400).json({ error: "Bad request" });
+    
     const invoice = await prisma.invoice.findUnique({
       where: {
         id,
@@ -40,6 +43,7 @@ const getInvoice = async (req, res, next) => {
 const createInvoice = async (req, res, next) => {
   try {
     const { projectId } = req.body;
+    if (!projectId) return res.status(400).json({ error: "Bad request" });
 
     //Get project and timeEntries
     const project = await prisma.project.findUnique({
@@ -71,8 +75,10 @@ const createInvoice = async (req, res, next) => {
       },
     });
 
+    if (!invoice) return res.status(404).json({ error: 'Failed to create invoice' });
+    
     //Update timeEntries that were included on this invoice
-    const updatedEntries = await prisma.timeEntry.updateMany({
+    await prisma.timeEntry.updateMany({
       where: {
         projectId,
         invoice: null,
@@ -97,7 +103,10 @@ const delInvoice = async (req, res, next) => {
         id,
       },
     });
+
+    if (!invoice) return res.status(404).json({ error: 'Unable to delete invoice' });
     res.Status(204);
+    
   } catch (err) {
     console.error(err);
   }
@@ -111,8 +120,6 @@ const getInvoiceEntries = async (req, res, next) => {
         invoice: id,
       },
     });
-
-    console.log(id);
 
     res.json(entries);
 

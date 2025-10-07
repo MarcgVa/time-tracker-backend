@@ -27,7 +27,7 @@ const getProject = async (req, res, next) => {
     res.json(project);
 
   } catch (err) {
-    console.log(err);
+    console.error(err);
   }
   
 };
