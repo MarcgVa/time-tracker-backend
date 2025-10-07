@@ -18,6 +18,23 @@ const getCompanyList = async (req,res,next) => {
   }
 }
 
+
+const getCompany = async (req,res,next) => {
+  try {
+    const id = req.params.id;
+    if (!id) return res.status(403).json({ error: "Bad request" });
+
+    const company = await prisma.company.findUnique({
+      where: {id},
+      include: {projects:true},
+    });
+    console.log('company',company);
+    res.json(company);
+  } catch (e) {
+    console.error(e);
+  }
+}
+
 const createCompany = async (req, res, next) => {
   try {
     const userId = req.user.id;
@@ -32,11 +49,50 @@ const createCompany = async (req, res, next) => {
         userId,
       },
     });
-    
+
     res.json(company);
   } catch (e) {
     console.error(e);
   }
 }
 
-module.exports = {getCompanyList, createCompany}
+const updateCompany = async (req, res, next) => {
+  try {
+    const id = req.params.id;
+    const { name, address, phone, contact } = req.body;
+    if (!id) return res.status(404).json({ error: "Not Found" });
+    
+    const company = await prisma.company.update({
+      where: { id },
+      data: {
+        name,
+        address,
+        phone,
+        contact
+      },
+    });
+
+    res.json(company)    
+  } catch (e) {
+    console.error(e);
+  }
+  
+}
+
+const deleteCompany = async (req, res, next) => {
+  try {
+    const id = req.params.id;
+
+    if (!id) return res.status(401).json({error: 'Unauthorized request'})
+    await prisma.company.delete({
+      where: { id },
+    });
+
+    res.sendStatus(204);
+
+  } catch (e) {
+    console.log(e);
+  }
+}
+
+module.exports = {getCompanyList, getCompany, createCompany,updateCompany, deleteCompany}

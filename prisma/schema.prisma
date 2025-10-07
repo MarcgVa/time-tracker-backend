@@ -28,7 +28,7 @@ model User {
 model Company {
   id       String    @id @default(uuid())
   name     String
-  phone    BigInt
+  phone    String
   address  String
   contact  String
   projects Project[]

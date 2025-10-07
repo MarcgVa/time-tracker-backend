@@ -10,13 +10,14 @@ const authRoutes = require("../src/routes/authRoutes");
 const projectRoutes = require('../src/routes/projectRoutes');
 const invoiceRoutes = require('../src/routes/invoiceRoutes');
 const timeEntryRoutes = require('../src/routes/timeEntryRoutes');
-
+const companyRoutes = require('../src/routes/companyRoutes')
 
 
 app.use("/api", authRoutes);
 app.use('/api', projectRoutes);
 app.use('/api', invoiceRoutes);
 app.use('/api', timeEntryRoutes);
+app.use('/api', companyRoutes);
 
 //simple health check
 app.get("/health", (req, res) => res.json({ ok: true }));
