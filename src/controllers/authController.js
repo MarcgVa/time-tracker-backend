@@ -19,7 +19,7 @@ const signup = async (req, res, next) => {
     });
 
     const token = jwt.sign({ id: user.id, email: user.email }, process.env.JWT_SECRET);
-    res.send(201).json({ user, token });
+    res.json({ user, token });
 
   }catch(err){
     res.status(400).json({ error: "User already exists" });
@@ -29,6 +29,8 @@ const signup = async (req, res, next) => {
 const login = async (req, res, next) => {
   try {
     const { email, password } = req.body;
+
+ 
     const user = await prisma.user.findUnique({
       where: { email },
     });
