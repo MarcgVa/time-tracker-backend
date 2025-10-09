@@ -8,5 +8,5 @@ router.get("/projects/", authenticateToken, getProjects);
 router.post("/projects/", authenticateToken, createProject);
 router.get("/projects/:projectId", authenticateToken, getProject);
 router.put("/projects/:projectId", authenticateToken, updateProject),
-  router.delete("/projects/:projectId", authenticateToken, deleteProject),
+router.delete("/projects/delete/:projectId", authenticateToken, deleteProject),
   (module.exports = router);

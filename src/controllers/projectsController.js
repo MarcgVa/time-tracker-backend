@@ -73,7 +73,7 @@ const updateProject = async (req, res, next) => {
 
 const deleteProject = async (req, res, next) => {
   try {
-    const { projectId } = req.params.id;
+    const { projectId } = req.params;
     const { userId } = req.user.id;
     const project = await prisma.project.delete({
       where: { id: projectId, userId },
