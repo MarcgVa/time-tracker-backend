@@ -14,6 +14,7 @@ const getProjects = async (req, res, next) => {
 
   } catch (err) {
     console.error(err);
+    res.status(400).json({ error: err });
   }
 };
 
@@ -28,6 +29,7 @@ const getProject = async (req, res, next) => {
 
   } catch (err) {
     console.error(err);
+    res.status(400).json({ error: err });
   }
   
 };
@@ -51,6 +53,7 @@ const createProject = async (req, res, next) => {
 
   } catch (err) {
     console.error(err);
+    res.status(400).json({ error: err });
   }
 };
 
@@ -67,6 +70,7 @@ const updateProject = async (req, res, next) => {
 
   } catch (err) {
     console.error(err);
+     res.status(400).json({ error: err });
   }
   
 };
@@ -74,16 +78,21 @@ const updateProject = async (req, res, next) => {
 const deleteProject = async (req, res, next) => {
   try {
     const { projectId } = req.params;
-    const { userId } = req.user.id;
-    const project = await prisma.project.delete({
-      where: { id: projectId, userId },
+    if (!projectId) return res.status(400).json({ error: "Bad request" });
+    
+    // Delete project, cascade will handle related timeEntries and invoices 
+    const deletedProject = await prisma.project.delete({
+      where: {
+        id: projectId,
+      },
     });
     
+    console.log('deletedProject',deletedProject);
     res.sendStatus(204);
 
   } catch (err) {
     console.error(err);
-    res.status(400).json({ error: "Unable to delete project" });
+    res.status(400).json({ error: err });
   }
 };
 

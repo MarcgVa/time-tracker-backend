@@ -51,8 +51,9 @@ const createCompany = async (req, res, next) => {
     });
 
     res.json(company);
-  } catch (e) {
-    console.error(e);
+  } catch (err) {
+    console.error(err);
+    res.status(400).json({ error: err });
   }
 }
 
@@ -73,8 +74,9 @@ const updateCompany = async (req, res, next) => {
     });
 
     res.json(company)    
-  } catch (e) {
-    console.error(e);
+  } catch (err) {
+    console.error(err);
+    res.status(400).json({ error: err });
   }
   
 }
@@ -90,8 +92,9 @@ const deleteCompany = async (req, res, next) => {
 
     res.sendStatus(204);
 
-  } catch (e) {
-    console.log(e);
+  } catch (err) {
+    console.log(err);
+    res.status(400).json({ error: err });
   }
 }
 

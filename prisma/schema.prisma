@@ -43,7 +43,7 @@ model Project {
   hourlyRate  Float
   user        User        @relation(fields: [userId], references: [id], onDelete: SetDefault, onUpdate: Cascade)
   userId      String
-  company     Company?    @relation(fields: [companyId], references: [id])
+  company     Company?    @relation(fields: [companyId], references: [id], onDelete: SetDefault, onUpdate: Cascade)
   companyId   String?
   timeEntries TimeEntry[]
   invoices    Invoice[]
@@ -53,8 +53,8 @@ model Project {
 
 model TimeEntry {
   id        Int       @id @default(autoincrement())
-  project   Project   @relation(fields: [projectId], references: [id], onDelete: SetDefault, onUpdate: Cascade)
-  projectId String
+  project   Project?  @relation(fields: [projectId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  projectId String?
   startTime DateTime
   endTime   DateTime?
   notes     String?
@@ -65,8 +65,8 @@ model TimeEntry {
 
 model Invoice {
   id        String    @id @default(uuid())
-  project   Project   @relation(fields: [projectId], references: [id], onDelete: SetDefault, onUpdate: Cascade)
-  projectId String
+  project   Project?  @relation(fields: [projectId], references: [id], onDelete: SetDefault, onUpdate: Cascade)
+  projectId String?
   total     Float
   issuedAt  DateTime?
   createdAt DateTime  @default(now())
