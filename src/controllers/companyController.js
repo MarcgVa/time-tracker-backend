@@ -98,4 +98,4 @@ const deleteCompany = async (req, res, next) => {
   }
 }
 
-module.exports = {getCompanyList, getCompany, createCompany,updateCompany, deleteCompany}
+module.exports = { getCompanyList, getCompany, createCompany, updateCompany, deleteCompany }
