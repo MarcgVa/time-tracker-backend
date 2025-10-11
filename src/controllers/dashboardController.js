@@ -1,6 +1,6 @@
 const { prisma } = require('../utils/prisma');
 
-const getDashboard = async (req, res, next) => {
+const getProjectDashboard = async (req, res, next) => {
   try {
     const userId = req.user.id;
 
@@ -9,21 +9,52 @@ const getDashboard = async (req, res, next) => {
       where: { userId },
     });
 
+    // Fetch total active projects
+    const activeProjects = await prisma.project.count({
+      where: {userId, isCompleted: false},
+    });
+    // Fetch total completed projects
+    const activeProjects = await prisma.project.count({
+      where: {userId, isCompleted: true},
+    });
+
+
     // Fetch total time entries
     const totalTimeEntries = await prisma.timeEntry.count({
       where: { project: { userId } },
     });
+
+    
 
     // Fetch total invoices
     const totalInvoices = await prisma.invoice.count({
       where: { project: { userId } },
     });
 
-    res.json({
+    const totals ={
       totalProjects,
       totalTimeEntries,
       totalInvoices,
-    });
+    };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   } catch (err) {
     console.error(err);
   }

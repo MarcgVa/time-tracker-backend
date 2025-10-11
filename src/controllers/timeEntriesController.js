@@ -4,6 +4,7 @@
 
 const { get } = require("../routes/authRoutes");
 const { prisma } = require("../utils/prisma");
+const { calculateTimeDifference } = require("../utils/time");
 
 const getTimeEntries = async (req, res, next) => {
   try {
@@ -40,13 +41,24 @@ const startTimer = async (req, res, next) => {
 
 const stopTimer = async (req, res, next) => {
   try {
-    const { id } = req.params;
+    const endTime = new Date();
+
+    const task = await prisma.timeEntry.findUnique({
+      where: { id: parseInt(req.params.id) },
+    });
+    if (!task) return res.status(404).json({ error: "Time entry not found" });
+
+    const project = await prisma.project.findUnique({
+      where: { id: task.projectId },
+    });
+    if (!project) return res.status(404).json({ error: "Project not found" }); 
+    const duration = calculateTimeDifference(new Date(task.startTime), new Date(endTime)).duration;
+    console.log('duration',duration);
     const entry = await prisma.timeEntry.update({
-      where: {
-        id: parseInt(id),
-      },
+      where: { id: task.id },
       data: {
-        endTime: new Date(),
+        endTime,
+        duration,
       },
     });
 

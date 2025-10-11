@@ -49,6 +49,7 @@ model Project {
   invoices    Invoice[]
   createdAt   DateTime    @default(now())
   updatedAt   DateTime    @updatedAt
+  isCompleted Boolean?    @default(false)
 }
 
 model TimeEntry {
@@ -61,6 +62,7 @@ model TimeEntry {
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
   invoice   String?
+  duration  String?
 }
 
 model Invoice {
