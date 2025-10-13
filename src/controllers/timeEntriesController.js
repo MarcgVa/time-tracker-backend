@@ -1,8 +1,6 @@
 /*
 
 */
-
-const { get } = require("../routes/authRoutes");
 const { prisma } = require("../utils/prisma");
 const { calculateTimeDifference } = require("../utils/time");
 

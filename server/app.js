@@ -10,9 +10,10 @@ const authRoutes = require("../src/routes/authRoutes");
 const projectRoutes = require('../src/routes/projectRoutes');
 const invoiceRoutes = require('../src/routes/invoiceRoutes');
 const timeEntryRoutes = require('../src/routes/timeEntryRoutes');
-const companyRoutes = require('../src/routes/companyRoutes')
+const companyRoutes = require('../src/routes/companyRoutes');
+const profileRoutes = require('../src/routes/profileRoutes');
 
-
+app.use('/api', profileRoutes); 
 app.use("/api", authRoutes);
 app.use('/api', projectRoutes);
 app.use('/api', invoiceRoutes);
