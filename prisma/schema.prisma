@@ -24,6 +24,7 @@ model User {
   profile   Profile?
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
+  refreshToken String[]
 }
 
 model Company {
@@ -86,14 +87,14 @@ model ContactMessage {
 
 model Profile {
   id        String   @id @default(uuid())
-  FirstName String?
-  LastName  String?
-  Address   String?
-  City      String?
-  State    String?
-  Zip       String?
-  Country   String?
-  Phone     String?
+  firstName String
+  lastName  String
+  address   String?
+  city      String?
+  state    String?
+  zip       String?
+  country   String?
+  phone     String?
   bio       String?
   avatar    String?
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)

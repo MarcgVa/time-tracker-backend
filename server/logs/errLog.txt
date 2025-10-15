@@ -1,0 +1,2 @@
+20251014	19:17:45	3d7a25b3-c0db-42fb-bbf2-0dd29c6f9483	TypeError: allowedOrigins.includes is not a function
+20251015	14:57:56	55ac3ee9-908f-4339-9249-54e818120aa3	TypeError: Cannot read properties of undefined (reading 'verify')

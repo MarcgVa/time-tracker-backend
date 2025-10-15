@@ -1,4 +1,4 @@
-const { prisma } = require("../src/utils/prisma");
+const { prisma } = require("./utils/prisma");
 const bcrypt = require("bcrypt");
 
 
@@ -14,6 +14,18 @@ async function main() {
       name: "Demo User",
       email: "demo@example.com",
       password: passwordHash,
+      profile: {
+        create: {
+          firstName: "Demo",
+          lastName: "User",
+          Phone: 5405551234,
+          bio: "Demo User",
+          Address: "123 Test Dr.",
+          City: "DemoLand",
+          Zip: "22405",
+          avatar: "https://avatar.iran.liara.run/public/320x320.png",
+        },
+      },
     },
   });
 
@@ -44,18 +56,21 @@ async function main() {
         startTime: new Date(Date.now() - 1000 * 60 * 60 * 5), // 5 hrs ago
         endTime: new Date(Date.now() - 1000 * 60 * 60 * 2), // 2 hrs ago
         notes: "Initial setup and design work",
+        duration: '0:3:0:0',
       },
       {
         projectId: project1.id,
         startTime: new Date(Date.now() - 1000 * 60 * 60 * 1), // 1 hr ago
         endTime: new Date(),
         notes: "Implemented responsive layout",
+        duration: '0:1:0:0',
       },
       {
         projectId: project2.id,
         startTime: new Date(Date.now() - 1000 * 60 * 60 * 3),
         endTime: new Date(Date.now() - 1000 * 60 * 60 * 1),
         notes: "Database schema setup",
+        duration: '0:2:0:0',
       },
     ],
   });
