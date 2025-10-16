@@ -8,6 +8,6 @@ const { protect } = require("../middleware/protect");
 router.get("/auth/refresh", handleRefreshToken);
 router.post("/auth/register", signup);
 router.post("/auth/login", login);
-router.post("/auth/logout", protect, logout);
+router.post("/auth/logout",logout);
 
 module.exports = router;

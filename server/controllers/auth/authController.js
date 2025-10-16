@@ -67,9 +67,15 @@ const login = async (req, res, next) => {
     if (valid) {
       // Generate tokens
       const accessToken = jwt.sign(
-        { id: user.id, email: user.email },
+        {
+          'UserInfo':{
+            id: user.id,
+            email: user.email 
+          }
+        },
         process.env.ACCESS_TOKEN_SECRET
       );
+      
       const newRefreshToken = jwt.sign(
         { id: user.id, email: user.email },
         process.env.REFRESH_TOKEN_SECRET

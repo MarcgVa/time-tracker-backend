@@ -1,2 +1,9 @@
 20251014	19:17:45	3d7a25b3-c0db-42fb-bbf2-0dd29c6f9483	TypeError: allowedOrigins.includes is not a function
 20251015	14:57:56	55ac3ee9-908f-4339-9249-54e818120aa3	TypeError: Cannot read properties of undefined (reading 'verify')
+20251015	22:35:45	b39cbb3d-4849-475d-aad0-2fbaf5972479	TypeError: Cannot read properties of undefined (reading 'username')
+20251015	22:35:58	6239d04f-f923-45ee-9446-58bcb7335188	TypeError: Cannot read properties of undefined (reading 'username')
+20251015	22:35:58	07988534-1427-49a7-bbf5-41b7c91ed929	TypeError: Cannot read properties of undefined (reading 'username')
+20251015	22:37:37	1cb544b7-c2db-49b3-bf06-2eb7c03a1599	TypeError: Cannot read properties of undefined (reading 'username')
+20251015	22:37:37	bc648574-cb00-42b3-b51d-949500e82590	TypeError: Cannot read properties of undefined (reading 'username')
+20251015	22:53:07	afceabc2-d923-47b0-8b47-2de5b4f23f26	TypeError: Cannot read properties of undefined (reading 'username')
+20251015	23:01:59	b1654896-d674-48d1-80d2-0674a0740605	TypeError: Cannot read properties of undefined (reading 'username')
