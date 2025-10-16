@@ -40,7 +40,6 @@ app.use("/", serverRoutes);
 // verify JWT token
 app.use(verifyJWT);
 
-// app.use(verifyJWT);
 
 
 // app.all("*", (req, res) => {
