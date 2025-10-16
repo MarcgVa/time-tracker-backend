@@ -7,3 +7,112 @@
 20251015	22:37:37	bc648574-cb00-42b3-b51d-949500e82590	TypeError: Cannot read properties of undefined (reading 'username')
 20251015	22:53:07	afceabc2-d923-47b0-8b47-2de5b4f23f26	TypeError: Cannot read properties of undefined (reading 'username')
 20251015	23:01:59	b1654896-d674-48d1-80d2-0674a0740605	TypeError: Cannot read properties of undefined (reading 'username')
+20251016	00:46:41	eb4420cb-b5ed-4e58-afcb-6cbd72dfb4d0	PrismaClientValidationError: 
+Invalid `prisma.user.findUnique()` invocation in
+/Volumes/External Drive/code/time-tracker/tt-backend/server/controllers/auth/logoutController.js:11:34
+
+   8 const cookies = req.cookies;
+   9 if (!cookies?.token) return res.sendStatus(204); //No Content
+  10 const refreshToken = cookies.token;
+→ 11 const user = await prisma.user.findUnique({
+       where: {
+         refreshToken: {
+           has: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjE1MjA1YjI3LTNiZWYtNGEyOC1iMmVhLWRlZjExZmU1N2M2MiIsImVtYWlsIjoibWdAdGVzdHMuY29tIiwiaWF0IjoxNzYwNTg0NjIzfQ.kwY_M5cCTExNYsdt7DKVWX_xfkfDresKCzyj3pKGy6g"
+         },
+     ?   id?: String,
+     ?   email?: String,
+     ?   AND?: UserWhereInput | UserWhereInput[],
+     ?   OR?: UserWhereInput[],
+     ?   NOT?: UserWhereInput | UserWhereInput[],
+     ?   name?: StringFilter | String,
+     ?   password?: StringFilter | String,
+     ?   createdAt?: DateTimeFilter | DateTime,
+     ?   updatedAt?: DateTimeFilter | DateTime,
+     ?   projects?: ProjectListRelationFilter,
+     ?   company?: CompanyListRelationFilter,
+     ?   profile?: ProfileNullableScalarRelationFilter | ProfileWhereInput | Null
+       }
+     })
+
+Argument `where` of type UserWhereUniqueInput needs at least one of `id` or `email` arguments. Available options are marked with ?.
+20251016	13:42:56	a1f95970-3c4f-4f7f-9ffc-1e5086d625ad	PrismaClientValidationError: 
+Invalid `prisma.user.findUnique()` invocation in
+/Volumes/External Drive/code/time-tracker/tt-backend/server/controllers/profileController.js:5:34
+
+  2 const { prisma } = require("../utils/prisma");
+  3 
+  4 const getProfile = async (req, res) => {
+→ 5   const user = await prisma.user.findUnique({
+        where: {
+          id: "15205b27-3bef-4a28-b2ea-def11fe57c62"
+        },
+        include: {
+          companies: true,
+          ~~~~~~~~~
+          projects: true,
+          profile: true,
+      ?   company?: true
+        }
+      })
+
+Unknown field `companies` for include statement on model `User`. Available options are marked with ?.
+20251016	17:58:43	b32fde9f-bbf7-4b5d-8706-1622ab04e997	PrismaClientValidationError: 
+Invalid `prisma.user.findUnique()` invocation in
+/Volumes/External Drive/code/time-tracker/tt-backend/server/controllers/auth/logoutController.js:11:34
+
+   8 const cookies = req.cookies;
+   9 if (!cookies?.token) return res.sendStatus(204); //No Content
+  10 const refreshToken = cookies.token;
+→ 11 const user = await prisma.user.findUnique({
+       where: {
+         refreshToken: {
+           has: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjE1MjA1YjI3LTNiZWYtNGEyOC1iMmVhLWRlZjExZmU1N2M2MiIsImVtYWlsIjoibWdAdGVzdHMuY29tIiwiaWF0IjoxNzYwNjM2NTI2fQ.y5ES82GGTynxCErM_xyo5Y5yDLrnVOJ_Kb58_UWAzVg"
+         },
+     ?   id?: String,
+     ?   email?: String,
+     ?   AND?: UserWhereInput | UserWhereInput[],
+     ?   OR?: UserWhereInput[],
+     ?   NOT?: UserWhereInput | UserWhereInput[],
+     ?   name?: StringFilter | String,
+     ?   password?: StringFilter | String,
+     ?   createdAt?: DateTimeFilter | DateTime,
+     ?   updatedAt?: DateTimeFilter | DateTime,
+     ?   role?: EnumRoleFilter | Role,
+     ?   projects?: ProjectListRelationFilter,
+     ?   company?: CompanyListRelationFilter,
+     ?   profile?: ProfileNullableScalarRelationFilter | ProfileWhereInput | Null,
+     ?   Invoice?: InvoiceListRelationFilter
+       }
+     })
+
+Argument `where` of type UserWhereUniqueInput needs at least one of `id` or `email` arguments. Available options are marked with ?.
+20251016	18:00:27	6992aa0f-bea6-4062-8988-ae910ebb09f2	PrismaClientValidationError: 
+Invalid `prisma.user.findUnique()` invocation in
+/Volumes/External Drive/code/time-tracker/tt-backend/server/controllers/auth/logoutController.js:11:34
+
+   8 const cookies = req.cookies;
+   9 if (!cookies?.token) return res.sendStatus(204); //No Content
+  10 const refreshToken = cookies.token;
+→ 11 const user = await prisma.user.findUnique({
+       where: {
+         refreshToken: {
+           has: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjE1MjA1YjI3LTNiZWYtNGEyOC1iMmVhLWRlZjExZmU1N2M2MiIsImVtYWlsIjoibWdAdGVzdHMuY29tIiwiaWF0IjoxNzYwNjUxOTc5fQ.VP5Qn0-nEZxDgldWr19HBshNCWDHN0tWYuaqaoVrmN8"
+         },
+     ?   id?: String,
+     ?   email?: String,
+     ?   AND?: UserWhereInput | UserWhereInput[],
+     ?   OR?: UserWhereInput[],
+     ?   NOT?: UserWhereInput | UserWhereInput[],
+     ?   name?: StringFilter | String,
+     ?   password?: StringFilter | String,
+     ?   createdAt?: DateTimeFilter | DateTime,
+     ?   updatedAt?: DateTimeFilter | DateTime,
+     ?   role?: EnumRoleFilter | Role,
+     ?   projects?: ProjectListRelationFilter,
+     ?   company?: CompanyListRelationFilter,
+     ?   profile?: ProfileNullableScalarRelationFilter | ProfileWhereInput | Null,
+     ?   Invoice?: InvoiceListRelationFilter
+       }
+     })
+
+Argument `where` of type UserWhereUniqueInput needs at least one of `id` or `email` arguments. Available options are marked with ?.

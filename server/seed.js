@@ -29,13 +29,38 @@ async function main() {
     },
   });
 
-  // 2. Create demo projects
+  // 2. Create Companies
+  const company1 = await prisma.company.create({
+    data: 
+      {
+        name: "Company1",
+        address: "1 Company Dr.",
+        phone: "555-555-1234",
+        contact: 'company1@company1.com',
+        user: user.id,
+      },
+  });
+  
+  const company2 = await prisma.company.create({
+    data: 
+      {
+        name: "Company2",
+        address: "2 Company Dr.",
+        phone: "555-555-1235",
+        contact: 'company2@company2.com',
+        user: user.id,
+      },
+  });
+
+
+  // 3. Create demo projects
   const project1 = await prisma.project.create({
     data: {
       name: "Portfolio Website",
       description: "Building a personal portfolio with React & Tailwind",
       hourlyRate: 75,
       userId: user.id,
+      company: company1.id
     },
   });
 
@@ -45,10 +70,12 @@ async function main() {
       description: "CRM system for small business",
       hourlyRate: 100,
       userId: user.id,
+      priority: "HIGH",
+      company: company2.id
     },
   });
 
-  // 3. Add some time entries
+  // 4. Add some time entries
   await prisma.timeEntry.createMany({
     data: [
       {
@@ -56,26 +83,26 @@ async function main() {
         startTime: new Date(Date.now() - 1000 * 60 * 60 * 5), // 5 hrs ago
         endTime: new Date(Date.now() - 1000 * 60 * 60 * 2), // 2 hrs ago
         notes: "Initial setup and design work",
-        duration: '0:3:0:0',
+        hours: 3.0,
       },
       {
         projectId: project1.id,
         startTime: new Date(Date.now() - 1000 * 60 * 60 * 1), // 1 hr ago
         endTime: new Date(),
         notes: "Implemented responsive layout",
-        duration: '0:1:0:0',
+        hours: 1.0,
       },
       {
         projectId: project2.id,
         startTime: new Date(Date.now() - 1000 * 60 * 60 * 3),
         endTime: new Date(Date.now() - 1000 * 60 * 60 * 1),
         notes: "Database schema setup",
-        duration: '0:2:0:0',
+        hours: 2.0,
       },
     ],
   });
 
-  // 4. Generate invoices
+  // 5. Generate invoices
   await prisma.invoice.createMany({
     data: [
       {

@@ -15,16 +15,18 @@ datasource db {
 }
 
 model User {
-  id        String    @id @default(uuid())
-  name      String
-  email     String    @unique
-  password  String
-  projects  Project[]
-  company   Company[]
-  profile   Profile?
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
+  id           String    @id @default(uuid())
+  name         String
+  email        String    @unique
+  password     String
+  projects     Project[]
+  company      Company[]
+  profile      Profile?
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
   refreshToken String[]
+  role         Role      @default(USER)
+  Invoice      Invoice[]
 }
 
 model Company {
@@ -52,6 +54,8 @@ model Project {
   createdAt   DateTime    @default(now())
   updatedAt   DateTime    @updatedAt
   isCompleted Boolean?    @default(false)
+  status      Status      @default(ACTIVE)
+  priority    Priority    @default(NORMAL)
 }
 
 model TimeEntry {
@@ -64,7 +68,7 @@ model TimeEntry {
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
   invoice   String?
-  duration  String?
+  hours     Float     @default(0.0)
 }
 
 model Invoice {
@@ -75,6 +79,9 @@ model Invoice {
   issuedAt  DateTime?
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
+  status    Status    @default(PENDING)
+  user      User      @relation(fields: [userId], references: [id], onDelete: SetDefault, onUpdate: Cascade)
+  userId    String
 }
 
 model ContactMessage {
@@ -91,7 +98,7 @@ model Profile {
   lastName  String
   address   String?
   city      String?
-  state    String?
+  state     String?
   zip       String?
   country   String?
   phone     String?
@@ -101,4 +108,23 @@ model Profile {
   userId    String   @unique
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
+
+enum Role {
+  USER
+  ADMIN
+  DISABLED
+}
+
+enum Status {
+  ACTIVE
+  PENDING
+  CLOSED
+}
+
+enum Priority {
+  URGENT
+  HIGH
+  NORMAL
+  LOW
 }

@@ -8,12 +8,29 @@ const calculateTimeDifference = (startDate, endDate) => {
   const hours = Math.floor(minutes / 60);
   const days = Math.floor(hours / 24);
 
-  const totalSeconds = `${seconds % 60}.${diffInMillis % 1000}`;
+  
   return {
-    duration: `${days}:${hours % 24}:${minutes % 60}:${
-      Math.round(totalSeconds * 1) / 1
-    }`,
+    hours: `${hours}.${Math.floor(minutes % 60)}` * 1, //Convert to Float
   };
 };
 
-module.exports = { calculateTimeDifference };
+
+
+// Week is Sunday through Saturday 
+const getFirstDayOfWeek = (d) => {
+  d = new Date(d);
+  const day = d.getDay();
+  const diff = d.getDate() - day
+  return new Date(d.setDate(diff));
+};
+
+const getLastDayOfWeek = (d) => {
+  d = new Date(d);
+  const day = d.getDay();
+  const diff = d.getDate() - day + 6;
+  return new Date(d.setDate(diff));
+};
+
+
+
+module.exports = { calculateTimeDifference, getFirstDayOfWeek, getLastDayOfWeek};

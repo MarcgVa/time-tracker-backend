@@ -48,16 +48,16 @@ const stopTimer = async (req, res, next) => {
       where: { id: task.projectId },
     });
     if (!project) return res.status(404).json({ error: "Project not found" });
-    const duration = calculateTimeDifference(
+    const hours = calculateTimeDifference(
       new Date(task.startTime),
       new Date(endTime)
-    ).duration;
-    console.log("duration", duration);
+    ).hours;
+    console.log("Hours", hours);
     const entry = await prisma.timeEntry.update({
       where: { id: task.id },
       data: {
         endTime,
-        duration,
+        hours,
       },
     });
 
