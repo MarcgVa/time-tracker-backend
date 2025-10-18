@@ -8,10 +8,10 @@ const {
 } = require("../controllers/companyController");
 const { protect } = require("../middleware/protect");
 
-router.get("/", protect, getCompanyList);
-router.get("/:id", protect, getCompany);
-router.post("/new", protect, createCompany);
-router.put("/:id", protect, updateCompany);
-router.delete("/:id", protect, deleteCompany);
+router.get("/company", protect, getCompanyList);
+router.get("/company/:id", protect, getCompany);
+router.post("/company/new", protect, createCompany);
+router.put("/company/:id", protect, updateCompany);
+router.delete("/company/:id/delete", protect, deleteCompany);
 
 module.exports = router;

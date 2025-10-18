@@ -6,9 +6,9 @@ const { protect } = require("../middleware/protect");
 const loginLimiter = require("../middleware/loginLimiter");
 
 
-router.get("/me", protect ,me);
-router.post("/register", signup);
-router.post("/login",loginLimiter, login);
-router.post("/logout",logout);
+router.get("/auth/me", protect ,me);
+router.post("/auth/register", signup);
+router.post("/auth/login", loginLimiter, login);
+router.post("/auth/logout", logout);
 
 module.exports = router;

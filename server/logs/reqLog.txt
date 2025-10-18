@@ -585,3 +585,8 @@
 20251017	20:30:37	e7d0f674-2b12-4c97-b26a-51032b099eef	POST	http://localhost:5173	/api/auth/login
 20251017	20:32:27	69e1f759-bf93-4d75-8a5a-242f29ee9a9d	GET	undefined	/api/auth/login
 20251017	20:32:27	2515d0f5-a151-487e-ba0c-6bccc76d3e07	GET	undefined	/favicon.ico
+20251017	21:37:37	75715542-c6fd-4db1-8cde-53f90d9875aa	GET	http://localhost:5173	/api/projects/undefined
+20251017	21:39:01	fffca373-0410-4b26-b65b-cea6034b8e68	GET	http://localhost:5173	/api/projects/undefined
+20251017	21:40:31	cd11f781-e109-44c2-9e6c-45c8c9c9d170	GET	http://localhost:5173	/api/projects/undefined
+20251017	21:41:56	f936e127-46c7-4fa5-bc44-2b40e04d2d3f	GET	http://localhost:5173	/api/projects/undefined
+20251017	21:43:14	42c2b97f-ef77-480d-ac8f-695d16d2298b	GET	http://localhost:5173	/api/projects/undefined

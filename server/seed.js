@@ -1,3 +1,4 @@
+const { Status } = require("../generated/prisma");
 const { prisma } = require("./utils/prisma");
 const bcrypt = require("bcrypt");
 
@@ -18,11 +19,11 @@ async function main() {
         create: {
           firstName: "Demo",
           lastName: "User",
-          Phone: 5405551234,
+          phone: '540-555-1234',
           bio: "Demo User",
-          Address: "123 Test Dr.",
-          City: "DemoLand",
-          Zip: "22405",
+          address: "123 Test Dr.",
+          city: "DemoLand",
+          zip: "22405",
           avatar: "https://avatar.iran.liara.run/public/320x320.png",
         },
       },
@@ -37,7 +38,7 @@ async function main() {
         address: "1 Company Dr.",
         phone: "555-555-1234",
         contact: 'company1@company1.com',
-        user: user.id,
+        userId: user.id,
       },
   });
   
@@ -48,7 +49,7 @@ async function main() {
         address: "2 Company Dr.",
         phone: "555-555-1235",
         contact: 'company2@company2.com',
-        user: user.id,
+        userId: user.id,
       },
   });
 
@@ -60,7 +61,8 @@ async function main() {
       description: "Building a personal portfolio with React & Tailwind",
       hourlyRate: 75,
       userId: user.id,
-      company: company1.id
+      companyId: company1.id,
+      status: 'InProgress',
     },
   });
 
@@ -71,7 +73,8 @@ async function main() {
       hourlyRate: 100,
       userId: user.id,
       priority: "HIGH",
-      company: company2.id
+      companyId: company2.id,
+      status: 'NotStarted',
     },
   });
 
@@ -93,7 +96,7 @@ async function main() {
         hours: 1.0,
       },
       {
-        projectId: project2.id,
+        projectId: project1.id,
         startTime: new Date(Date.now() - 1000 * 60 * 60 * 3),
         endTime: new Date(Date.now() - 1000 * 60 * 60 * 1),
         notes: "Database schema setup",
@@ -109,11 +112,15 @@ async function main() {
         projectId: project1.id,
         total: 225, // Example total
         issuedAt: new Date(Date.now() - 1000 * 60 * 60 * 24 * 2),
+        userId: user.id,
+        status: 'Paid'
       },
       {
-        projectId: project2.id,
+        projectId: project1.id,
         total: 200,
         issuedAt: new Date(Date.now() - 1000 * 60 * 60 * 24 * 1),
+        userId: user.id,
+        status:'Overdue'
       },
     ],
   });

@@ -8,6 +8,6 @@ const {
 
 router.get("/profile", protect, getProfile);
 router.put("/profile", protect, updateProfile);
-router.put("/password", protect, updatePassword);
+router.put("/profile/password", protect, updatePassword);
 
 module.exports = router;
