@@ -8,7 +8,7 @@ const {
 } = require("../controllers/projects/projectsController");
 const { protect } = require("../middleware/protect");
 
-router.get("/projects/", protect, getProjects);
+router.get("/projects", protect, getProjects);
 router.post("/projects/", protect, createProject);
 router.get("/projects/:projectId", protect, getProject);
 router.put("/projects/:projectId", protect, updateProject);

@@ -1,62 +1,32 @@
+const app = require("./app/app");
 require("dotenv").config();
-const express = require("express");
-const app = express();
+const PORT = process.env.PORT || 3001;
 const cors = require("cors");
-const corsOptions = require("./config/corsOptions");
-const {logger} = require("./middleware/logEvents");
+const { logger } = require("./middleware/logEvents");
 const errorHandler = require("./middleware/errorHandler");
-const verifyJWT = require("./middleware/verifyJWT");
-const cookieParser = require("cookie-parser");
-const credentials = require("./middleware/credentials");
-const PORT = process.env.PORT || 4000;
-const path = require("path");
-
-
-// custom middleware logger
+app.use(cors());
 app.use(logger);
-app.use(credentials);
-// Cross Origin Resource Sharing
-//app.use(cors(corsOptions));
-app.use(cors({ origin: true, credentials: true }));
-//built-in middleware to handle urlencoded form data
-app.use(express.urlencoded({ extended: false }));
+app.use((req, res, next) => {
+  res.setHeader(
+    "Access-Control-Allow-Origin",
+    "https://localhost:5173/"
+  );
+  res.setHeader(
+    "Access-Control-Allow-Methods",
+    "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS,CONNECT,TRACE"
+  );
+  res.setHeader(
+    "Access-Control-Allow-Headers",
+    "Content-Type, Authorization, X-Content-Type-Options, Accept, X-Requested-With, Origin, Access-Control-Request-Method, Access-Control-Request-Headers"
+  );
+  res.setHeader("Access-Control-Allow-Credentials", true);
+  res.setHeader("Access-Control-Allow-Private-Network", true);
+  //  Firefox caps this at 24 hours (86400 seconds). Chromium (starting in v76) caps at 2 hours (7200 seconds). The default value is 5 seconds.
+  res.setHeader("Access-Control-Max-Age", 7200);
 
-//built-in middleware for json
-app.use(express.json());
+  next();
+});
 
-//middleware for cookies
-app.use(cookieParser());
-
-//server static files
-app.use("/", express.static(path.join(__dirname,'/public')));
-
-// routes
-const serverRoutes = require("./serverRoutes");
-app.use("/", serverRoutes);
-//app.use("/", require("./routes/root"));
-
-
-// routes below this middleware are protected
-// verify JWT token
-app.use(verifyJWT);
-
-
-
-// app.all("*", (req, res) => {
-//   res.status(404);
-//   if (req.accepts("html")) {
-//     res.sendFile(path.join(__dirname, "views", "404.html"));
-//   } else if (req.accepts("json")) {
-//     res.json({ message: "404 Not Found" });
-//   } else {
-//     res.type("txt").send("404 Not Found");
-//   }
-// });
-
-// error handler
-app.use(errorHandler);
-
-
-app.listen(4000, () =>
-  console.log("🚀 Server running on http://localhost:4000")
-);
+app.listen(PORT, () => {
+  console.log(`Listening on port ${PORT}...`);
+});

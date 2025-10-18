@@ -2,7 +2,7 @@ require("dotenv").config();
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const { prisma } = require("../../utils/prisma");
-const e = require("express");
+
 
 const signup = async (req, res, next) => {
   try {

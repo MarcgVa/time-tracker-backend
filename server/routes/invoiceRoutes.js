@@ -8,10 +8,10 @@ const {
 } = require("../controllers/invoicesController");
 const { protect } = require("../middleware/protect");
 
-router.get("/invoice/:projectId/invoices", protect, getInvoices);
-router.get("/invoice/:id/details", protect, getInvoiceEntries);
-router.get("/invoice/:id", protect, getInvoice);
-router.post("/invoice/", protect, createInvoice);
-router.delete("/invoice/:id/delete", protect, delInvoice);
+router.get("/:projectId/invoices", protect, getInvoices);
+router.get("/:id/details", protect, getInvoiceEntries);
+router.get("/:id", protect, getInvoice);
+router.post("/new", protect, createInvoice);
+router.delete("/:id/delete", protect, delInvoice);
 
 module.exports = router;

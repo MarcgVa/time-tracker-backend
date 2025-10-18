@@ -116,3 +116,69 @@ Invalid `prisma.user.findUnique()` invocation in
      })
 
 Argument `where` of type UserWhereUniqueInput needs at least one of `id` or `email` arguments. Available options are marked with ?.
+20251017	17:08:58	7bffb7ad-da33-459a-9868-d2a4dc5f1d08	PrismaClientValidationError: 
+Invalid `prisma.user.findUnique()` invocation in
+/Volumes/External Drive/code/time-tracker/tt-backend/server/controllers/profileController.js:5:34
+
+  2 const { prisma } = require("../utils/prisma");
+  3 
+  4 const getProfile = async (req, res) => {
+→ 5   const user = await prisma.user.findUnique({
+        where: {
+          id: "a7dbbee5-1266-4864-9b72-d4cbd58efe06"
+        },
+        include: {
+          companies: true,
+          ~~~~~~~~~
+          projects: true,
+          profile: true,
+      ?   company?: true,
+      ?   Invoice?: true
+        }
+      })
+
+Unknown field `companies` for include statement on model `User`. Available options are marked with ?.
+20251017	17:15:13	3b3edf35-ec59-4fa0-b627-0f585c974058	PrismaClientValidationError: 
+Invalid `prisma.user.findUnique()` invocation in
+/Volumes/External Drive/code/time-tracker/tt-backend/server/controllers/profileController.js:5:34
+
+  2 const { prisma } = require("../utils/prisma");
+  3 
+  4 const getProfile = async (req, res) => {
+→ 5   const user = await prisma.user.findUnique({
+        where: {
+          id: "a7dbbee5-1266-4864-9b72-d4cbd58efe06"
+        },
+        include: {
+          companies: true,
+          ~~~~~~~~~
+          projects: true,
+          profile: true,
+      ?   company?: true,
+      ?   Invoice?: true
+        }
+      })
+
+Unknown field `companies` for include statement on model `User`. Available options are marked with ?.
+20251017	19:33:02	c3d0f2e6-15f5-4fff-b3ec-e1994f890b99	PrismaClientValidationError: 
+Invalid `prisma.user.findUnique()` invocation in
+/Volumes/External Drive/code/time-tracker/tt-backend/server/controllers/profileController.js:5:34
+
+  2 const { prisma } = require("../utils/prisma");
+  3 
+  4 const getProfile = async (req, res) => {
+→ 5   const user = await prisma.user.findUnique({
+        where: {
+          id: "a7dbbee5-1266-4864-9b72-d4cbd58efe06"
+        },
+        include: {
+          companies: true,
+          ~~~~~~~~~
+          projects: true,
+          profile: true,
+      ?   company?: true,
+      ?   Invoice?: true
+        }
+      })
+
+Unknown field `companies` for include statement on model `User`. Available options are marked with ?.

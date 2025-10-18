@@ -54,8 +54,9 @@ model Project {
   createdAt   DateTime    @default(now())
   updatedAt   DateTime    @updatedAt
   isCompleted Boolean?    @default(false)
-  status      Status      @default(ACTIVE)
+  status      Status      @default(NotStarted)
   priority    Priority    @default(NORMAL)
+  dueDate DateTime
 }
 
 model TimeEntry {
@@ -117,9 +118,9 @@ enum Role {
 }
 
 enum Status {
-  ACTIVE
-  PENDING
-  CLOSED
+  InProgress
+  Completed
+  NotStarted
 }
 
 enum Priority {
