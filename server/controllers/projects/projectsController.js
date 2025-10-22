@@ -33,7 +33,7 @@ const getProject = async (req, res, next) => {
 
 const createProject = async (req, res, next) => {
   try {
-    const { name, description, hourlyRate } = req.body;
+    const { name, description, hourlyRate, dueDate } = req.body;
     const userId = req.user.id;
 
     const project = await prisma.project.create({
@@ -42,6 +42,7 @@ const createProject = async (req, res, next) => {
         description,
         hourlyRate: Number(hourlyRate),
         userId,
+        dueDate: new Date(dueDate),
       },
     });
 

@@ -1,15 +1,14 @@
 const app = require("./app/app");
 require("dotenv").config();
-const PORT = process.env.PORT || 3001;
-const cors = require("cors");
+const PORT = process.env.PORT || 4000;
 const { logger } = require("./middleware/logEvents");
 const errorHandler = require("./middleware/errorHandler");
-app.use(cors());
+
 app.use(logger);
 app.use((req, res, next) => {
   res.setHeader(
     "Access-Control-Allow-Origin",
-    "http://localhost:5173/"
+    "http://localhost:5173"
   );
   res.setHeader(
     "Access-Control-Allow-Methods",

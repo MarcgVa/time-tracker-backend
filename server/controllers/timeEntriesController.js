@@ -17,6 +17,22 @@ const getTimeEntries = async (req, res, next) => {
   }
 };
 
+const getDailyActivity = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const entries = await prisma.timeEntry.findMany({
+      where: {
+        createdAt: { gte: prisma.NOW(),},
+        projectId: { equals: id }
+      },
+    });
+    console.log('entries', entries);
+    res.json(entries || []);
+  } catch (err) {
+    console.error(err);
+  }
+};
+
 const startTimer = async (req, res, next) => {
   try {
     const { id } = req.params;
@@ -81,4 +97,4 @@ const delTimeEntry = async (req, res, next) => {
   }
 };
 
-module.exports = { getTimeEntries, startTimer, stopTimer, delTimeEntry };
+module.exports = { getTimeEntries, getDailyActivity,startTimer, stopTimer, delTimeEntry };

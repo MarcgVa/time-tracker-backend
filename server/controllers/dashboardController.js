@@ -2,17 +2,17 @@ const { prisma } = require('../utils/prisma');
 const { getFirstDayOfWeek,getLastDayOfWeek } = require('../utils/time');
 
 
+const dayOfWeek = [
+{ day: "Sunday", hours: 0 },
+{ day: "Monday", hours: 0 },
+{ day: "Tuesday", hours: 0 },
+{ day: "Wednesday", hours: 0 },
+{ day: "Thursday", hours: 0 },
+{ day: "Friday", hours: 0 },
+{ day: "Saturday", hours: 0 },
+];
 
 const getDashboardInfo = async (req, res) => {
-  const dayOfWeek = [
-  { day: "Sunday", hours: 0 },
-  { day: "Monday", hours: 0 },
-  { day: "Tuesday", hours: 0 },
-  { day: "Wednesday", hours: 0 },
-  { day: "Thursday", hours: 0 },
-  { day: "Friday", hours: 0 },
-  { day: "Saturday", hours: 0 },
-  ];
 
   const firstDay = getFirstDayOfWeek(new Date());
   const lastDay = getLastDayOfWeek(new Date());
@@ -36,11 +36,11 @@ const getDashboardInfo = async (req, res) => {
     });
     
     const activeProjects = await prisma.project.count({
-      where: { userId, status: "ACTIVE" },
+      where: { userId, status: "InProgress" },
     });
     
     const upcomingInvoices = await prisma.invoice.aggregate({
-      where: { userId, status: "PENDING" },
+      where: { userId, status: "Pending" },
       _sum: { total: true },
     });
 
