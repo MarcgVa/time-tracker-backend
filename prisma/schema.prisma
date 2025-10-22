@@ -73,7 +73,7 @@ model TimeEntry {
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
   invoice   String?
-  hours     Float     @default(0.0)
+  hours     String?    
 }
 
 model Invoice {

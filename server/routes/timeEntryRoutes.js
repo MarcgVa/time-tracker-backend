@@ -8,8 +8,8 @@ const {
 } = require("../controllers/timeEntriesController");
 const { protect } = require("../middleware/protect");
 
-router.get("time/:id", getTimeEntries);
-router.get("time/:id/activity", getDailyActivity)
+router.get("/time/:id", getTimeEntries);
+router.get("/time/:id/activity", getDailyActivity)
 router.post("/time/:id/start", protect, startTimer);
 router.put("/time/:id/stop", protect, stopTimer);
 router.delete("/time/:id/delete", protect, delTimeEntry);
