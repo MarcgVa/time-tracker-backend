@@ -59,9 +59,10 @@ const startTimer = async (req, res, next) => {
         projectId: id,
         notes,
         startTime: new Date(),
+        hours: null,
       },
     });
-
+    console.log('sendingBack', entry);
     res.json(entry);
   } catch (err) {
     console.error(err);
@@ -81,11 +82,10 @@ const stopTimer = async (req, res, next) => {
       where: { id: task.projectId },
     });
     if (!project) return res.status(404).json({ error: "Project not found" });
-    const hours = calculateTimeDifference(
-      new Date(task.startTime),
-      new Date(endTime)
-    ).hours;
+    const hours = calculateTimeDifference(task.startTime, endTime).hours;
+    
     console.log("Hours", hours);
+    
     const entry = await prisma.timeEntry.update({
       where: { id: task.id },
       data: {
