@@ -55,7 +55,8 @@ const createProject = async (req, res, next) => {
 
 const updateProject = async (req, res, next) => {
   try {
-    const { id, name, description, hourlyRate } = req.params;
+    const { id } = req.params;
+    const { name, description, hourlyRate } = req.body;
     const project = await prisma.project.update({
       where: { id },
       data: { name, description, hourlyRate },

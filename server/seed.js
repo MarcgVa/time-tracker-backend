@@ -86,21 +86,24 @@ async function main() {
         startTime: new Date(Date.now() - 1000 * 60 * 60 * 5), // 5 hrs ago
         endTime: new Date(Date.now() - 1000 * 60 * 60 * 2), // 2 hrs ago
         notes: "Initial setup and design work",
-        hours: 3.0,
+        userId: user.id,
+        hours: "03:00:00",
       },
       {
         projectId: project1.id,
         startTime: new Date(Date.now() - 1000 * 60 * 60 * 1), // 1 hr ago
         endTime: new Date(),
         notes: "Implemented responsive layout",
-        hours: 1.0,
+        userId: user.id,
+        hours: "01:00:00",
       },
       {
         projectId: project1.id,
         startTime: new Date(Date.now() - 1000 * 60 * 60 * 3),
         endTime: new Date(Date.now() - 1000 * 60 * 60 * 1),
         notes: "Database schema setup",
-        hours: 2.0,
+        userId: user.id,
+        hours: '02:00:00',
       },
     ],
   });

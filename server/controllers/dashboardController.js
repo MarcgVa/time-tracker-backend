@@ -1,4 +1,5 @@
 const { prisma } = require('../utils/prisma');
+const {getTotalLoggedTime, getEntryTotalTime} = require('../utils/time');
 const { getFirstDayOfWeek,getLastDayOfWeek } = require('../utils/time');
 
 
@@ -16,25 +17,17 @@ const getDashboardInfo = async (req, res) => {
 
   const firstDay = getFirstDayOfWeek(new Date());
   const lastDay = getLastDayOfWeek(new Date());
-
   
   try {
     const userId = req.user.id;
     
-    const projects = await prisma.project.findMany({
-      where: { userId },
+      
+    const allTimeEntries = await prisma.timeEntry.findMany({
+      where: { userId, },
     });
+    
+    const totalHours = getTotalLoggedTime(allTimeEntries);
 
-    
-    const totalHours = await prisma.timeEntry.aggregate({
-      where: { 
-        projectId: {
-          contains: projects.id
-        },
-      },
-      _sum: { hours: true },
-    });
-    
     const activeProjects = await prisma.project.count({
       where: { userId, status: "InProgress" },
     });
@@ -48,14 +41,14 @@ const getDashboardInfo = async (req, res) => {
     const timeEntries = await prisma.timeEntry.findMany({
       where: {
         startTime: {
-          lte: firstDay,
-          gte: lastDay,
+          lte: lastDay,
+          gte: firstDay,
         },
       }
     })
-    
+
     timeEntries.forEach(entry => {
-      dayOfWeek[new Date(entry.startTime).getDay()].hours += entry.hours;
+      dayOfWeek[new Date(entry.startTime).getDay()].hours += getEntryTotalTime(entry);
     });
     
     // Mocked weekly data — you’d generate from real time entries
@@ -70,7 +63,7 @@ const getDashboardInfo = async (req, res) => {
     ];
 
     res.json({
-      totalHours: totalHours._sum.hours || 0,
+      totalHours: totalHours || 0,
       activeProjects,
       upcomingInvoices: upcomingInvoices._sum.total || 0,
       weeklyData,

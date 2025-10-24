@@ -8,51 +8,39 @@ const getProjectDashboard = async (req, res, next) => {
     const totalProjects = await prisma.project.count({
       where: { userId },
     });
+    console.log('totalProjects', totalProjects);
 
     // Fetch total active projects
     const activeProjects = await prisma.project.count({
       where: {userId, isCompleted: false},
     });
+    console.log('activeProjects', activeProjects);
+
     // Fetch total completed projects
-    const activeProjects = await prisma.project.count({
+    const completedProjects = await prisma.project.count({
       where: {userId, isCompleted: true},
     });
-
+    console.log('completedProjects', completedProjects);
+    
 
     // Fetch total time entries
     const totalTimeEntries = await prisma.timeEntry.count({
       where: { project: { userId } },
     });
-
-    
+    console.log('totalTimeEntries', totalTimeEntries);
 
     // Fetch total invoices
     const totalInvoices = await prisma.invoice.count({
       where: { project: { userId } },
     });
-
+    console.log('totalInvoices', totalInvoices);
     const totals ={
       totalProjects,
       totalTimeEntries,
       totalInvoices,
     };
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    res.json(totals);
 
 
   } catch (err) {

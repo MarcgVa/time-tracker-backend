@@ -52,6 +52,7 @@ const getDailyActivity = async (req, res, next) => {
 
 const startTimer = async (req, res, next) => {
   try {
+    const userId = req.user.id;
     const { id } = req.params;
     const { notes } = req.body;
     const entry = await prisma.timeEntry.create({
@@ -60,6 +61,7 @@ const startTimer = async (req, res, next) => {
         notes,
         startTime: new Date(),
         hours: null,
+        userId,
       },
     });
     console.log('sendingBack', entry);
